@@ -49,9 +49,9 @@ public class ElfSectionSymTabParse implements Parse {
 
         for (int i = 0; i < symTabElementList.size(); i++) {
             SymTabElement symTabElement = symTabElementList.get(i);
-            if(symTabElement.name != null && symTabElement.name.contains("fork")) {
+//            if(symTabElement.name != null && symTabElement.name.contains("fork")) {
                 System.out.println(i + "," + symTabElementList.get(i).toString());
-            }
+//            }
         }
 
 

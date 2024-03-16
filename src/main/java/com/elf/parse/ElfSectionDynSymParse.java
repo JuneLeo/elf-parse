@@ -49,9 +49,9 @@ public class ElfSectionDynSymParse implements Parse {
 
         for (int i = 0; i < dynSymElementList.size(); i++) {
             DynSymElement dynSymElement = dynSymElementList.get(i);
-            if(dynSymElement.name != null && dynSymElement.name.contains("fork")) {
+//            if(dynSymElement.name != null && dynSymElement.name.contains("fork")) {
                 System.out.println(i + "," + dynSymElementList.get(i));
-            }
+//            }
         }
 
 
