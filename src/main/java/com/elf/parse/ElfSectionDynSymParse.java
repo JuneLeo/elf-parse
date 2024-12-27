@@ -1,6 +1,7 @@
 package com.elf.parse;
 
 import com.elf.parse.section.DynSymElement;
+import com.elf.parse.section.SymInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class ElfSectionDynSymParse implements Parse {
             DynSymElement symTabElement = new DynSymElement();
             symTabElement.symNameOff = Utils.getU4Int(begin, bytes);
             begin += 4;
-            symTabElement.symInfo = Utils.getU1Int(begin, bytes);
+            symTabElement.symInfo = new SymInfo(Utils.getU1Int(begin, bytes));
             begin += 1;
             symTabElement.symOther = Utils.getU1Int(begin, bytes);
             begin += 1;

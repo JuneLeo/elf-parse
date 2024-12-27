@@ -5,7 +5,7 @@ public class DynSymElement {
 
     public String name;
 
-    public int symInfo; // 1
+    public SymInfo symInfo; // 1
 
     public int symOther; //1
 

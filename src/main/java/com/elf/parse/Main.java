@@ -17,10 +17,12 @@ public class Main {
 
     public static void main(String[] args) {
 
-        byte[] bytes = readFile("/Users/juneleo/Desktop/libcall.so");
+        byte[] bytes = readFile("/Users/juneleo/Desktop/libamapvcs.so");
 
         ElfHeaderParse elfHeaderParse = new ElfHeaderParse();
         elfHeaderParse.parse(0, bytes);
+
+        System.out.println(17 & 0xf);
 
     }
     //122592
