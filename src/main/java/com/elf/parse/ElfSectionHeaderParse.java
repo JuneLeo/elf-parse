@@ -63,9 +63,9 @@ public class ElfSectionHeaderParse implements Parse {
         for (SectionElement element : sectionElementList) {
             element.name = Utils.getString(sStrOffset + element.nameOffset, bytes);
         }
-        System.out.println("--------------- Section Header ---------------");
+        Utils.log("--------------- Section Header ---------------");
         for (int i = 0; i < sectionElementList.size(); i++) {
-            System.out.println(i+ "," + sectionElementList.get(i));
+            Utils.log(i+ "," + sectionElementList.get(i));
         }
 
 

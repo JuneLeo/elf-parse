@@ -23,7 +23,7 @@ public class ElfSectionSymTabParse implements Parse {
 
     @Override
     public int parse(long s, byte[] bytes) {
-        System.out.println("-------------ElfSymTabParse-------------");
+        Utils.log("-------------ElfSymTabParse-------------");
         int start = (int) s;
         int length = (int) (size / entrySize);
 
@@ -51,9 +51,7 @@ public class ElfSectionSymTabParse implements Parse {
         for (int i = 0; i < symTabElementList.size(); i++) {
             SymTabElement symTabElement = symTabElementList.get(i);
             //
-            if(symTabElement.name != null && (symTabElement.name.contains("ostreambuf_iterator") || symTabElement.name.contains("FOO"))) {
-                System.out.println(i + "," + symTabElementList.get(i).toString());
-            }
+            Utils.log(i + "," + symTabElement);
         }
 
         /**

@@ -47,9 +47,9 @@ public class ElfProgramHeaderParse implements Parse {
         }
 
 
-        System.out.println("--------------- Program Header ---------------");
+        Utils.log("--------------- Program Header ---------------");
         for (int i = 0; i < segmentElementList.size(); i++) {
-            System.out.println(i + "," + segmentElementList.get(i));
+            Utils.log(i + "," + segmentElementList.get(i));
         }
 
 

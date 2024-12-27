@@ -23,7 +23,7 @@ public class ElfSectionDynSymParse implements Parse {
 
     @Override
     public int parse(long s, byte[] bytes) {
-        System.out.println("-----------ElfDynSymParse-------------");
+        Utils.log("-----------ElfDynSymParse-------------");
         int start = (int) s;
         int length = (int) (size / entrySize);
 
@@ -51,7 +51,7 @@ public class ElfSectionDynSymParse implements Parse {
         for (int i = 0; i < dynSymElementList.size(); i++) {
             DynSymElement dynSymElement = dynSymElementList.get(i);
 //            if(dynSymElement.name != null && dynSymElement.name.contains("fork")) {
-                System.out.println(i + "," + dynSymElementList.get(i));
+                Utils.log(i + "," + dynSymElement);
 //            }
         }
 

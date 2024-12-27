@@ -46,7 +46,7 @@ public class ElfHeaderParse implements Parse {
 
     @Override
     public int parse(long start, byte[] bytes) {
-        System.out.println("Elf Header:");
+        Utils.log("Elf Header:");
         // ident
         for (int i = 0; i < 4; i++) {
             int ident = Utils.getU1Int(i, bytes);
@@ -78,45 +78,45 @@ public class ElfHeaderParse implements Parse {
 
         eType = EType.getEType(Utils.getU2Int(16, bytes));
         if (eType != null) {
-            System.out.println("文件类型：" + eType.name());
+            Utils.log("文件类型：" + eType.name());
         }
 
         eMachine = EMachine.getEmachine(Utils.getU2Int(18, bytes));
         if (eMachine != null) {
-            System.out.println("结构类型：" + eMachine.name());
+            Utils.log("结构类型：" + eMachine.name());
         }
 
         eVersion = EVersion.getEVersion(Utils.getU4Int(20, bytes));
         if (eVersion != null) {
-            System.out.println("目标文件版本：" + eVersion.name());
+            Utils.log("目标文件版本：" + eVersion.name());
         }
 
         eEntry = Utils.getU8Long(0x18, bytes);
-        System.out.println("程序入口地址：" + eEntry);
+        Utils.log("程序入口地址：" + eEntry);
         ePhoff = Utils.getU8Long(0x20, bytes);
-        System.out.println("program header 偏移：" + ePhoff);
+        Utils.log("program header 偏移：" + ePhoff);
         eShoff = Utils.getU8Long(0x28, bytes);
-        System.out.println("section header 偏移：" + eShoff);
+        Utils.log("section header 偏移：" + eShoff);
 
         eFlags = Utils.getU4Int(0x30, bytes);
 
         elfHeaderSize = Utils.getU2Int(0x34, bytes);
-        System.out.println("header size：" + elfHeaderSize);
+        Utils.log("header size：" + elfHeaderSize);
 
         ePhEntrySize = Utils.getU2Int(0x36, bytes);
-        System.out.println("program header entry结构 size：" + ePhEntrySize);
+        Utils.log("program header entry结构 size：" + ePhEntrySize);
 
         ePhNum = Utils.getU2Int(0x38, bytes);
-        System.out.println("program header size：" + ePhNum);
+        Utils.log("program header size：" + ePhNum);
 
         eShEntrySize = Utils.getU2Int(0x3A, bytes);
-        System.out.println("section header entry结构 size：" + eShEntrySize);
+        Utils.log("section header entry结构 size：" + eShEntrySize);
 
         eShNum = Utils.getU2Int(0x3C, bytes);
-        System.out.println("section header size：" + eShNum);
+        Utils.log("section header size：" + eShNum);
 
         e_ShStrIndex = Utils.getU2Int(0x3E, bytes);
-        System.out.println("section中string table index：" + e_ShStrIndex);
+        Utils.log("section中string table index：" + e_ShStrIndex);
 
 
         ElfProgramHeaderParse elfProgramHeaderParse = new ElfProgramHeaderParse(ePhoff, ePhEntrySize, ePhNum);
@@ -130,26 +130,26 @@ public class ElfHeaderParse implements Parse {
     }
 
     private void printEident() {
-        System.out.println("Eident content");
-        System.out.print("Magic：");
+        Utils.log("Eident content");
+        StringBuilder magicName = new StringBuilder("Magic：");
         for (char c : magic) {
-            System.out.print("" + c);
+            magicName.append(c);
         }
-        System.out.println("");
+        Utils.log(magicName.toString());
         if (eiClass != null) {
-            System.out.println(eiClass.name());
+            Utils.log(eiClass.name());
         }
 
         if (eiData != null) {
-            System.out.println("编码方式：" + eiData.name() + "（大端/小端）");
+            Utils.log("编码方式：" + eiData.name() + "（大端/小端）");
         }
 
         if (eiVersion != null) {
-            System.out.println(eiVersion.name());
+            Utils.log(eiVersion.name());
         }
 
         if (eiOSAbi != null) {
-            System.out.println(eiOSAbi.name());
+            Utils.log(eiOSAbi.name());
         }
     }
 

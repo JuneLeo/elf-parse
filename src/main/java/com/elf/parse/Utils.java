@@ -91,11 +91,19 @@ public final class Utils {
             b = bytes[end];
         }
         int length = end - start;
-        if(length == 0) {
+        if (length == 0) {
             return null;
         }
         byte[] strBytes = new byte[length];
         System.arraycopy(bytes, start, strBytes, 0, length);
         return new String(strBytes, StandardCharsets.ISO_8859_1);
+    }
+
+    public static void log(String tag, String msg) {
+        System.out.println(tag + " : " + msg);
+    }
+
+    public static void log(String msg) {
+        log("elf-parse", msg);
     }
 }
