@@ -22,7 +22,7 @@ public class ElfSectionDynSymParse implements Parse {
     }
 
     @Override
-    public int parse(long s, byte[] bytes) {
+    public void parse(long s, byte[] bytes) {
         Utils.log("-----------ElfDynSymParse-------------");
         int start = (int) s;
         int length = (int) (size / entrySize);
@@ -54,10 +54,6 @@ public class ElfSectionDynSymParse implements Parse {
                 Utils.log(i + "," + dynSymElement);
 //            }
         }
-
-
-
-        return 0;
     }
 
     public long getMethodAddress(String method) {

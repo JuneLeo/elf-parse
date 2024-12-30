@@ -1,5 +1,7 @@
 package com.elf.parse.section;
 
+import com.elf.parse.Utils;
+
 public class SymTabElement {
     public int symNameOff;//4
 

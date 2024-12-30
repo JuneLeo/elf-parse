@@ -9,43 +9,40 @@ import com.elf.parse.header.EType;
 import com.elf.parse.header.EVersion;
 
 public class ElfHeaderParse implements Parse {
-    private final char[] magic = new char[4];
-    private EiClass eiClass;
-    private EiData eiData;
-    private EiVersion eiVersion;
-    private EiOSAbi eiOSAbi;
+    public final char[] magic = new char[4];
+    public EiClass eiClass;
+    public EiData eiData;
+    public EiVersion eiVersion;
+    public EiOSAbi eiOSAbi;
 
-    private final char[] eiPad = new char[6]; // 填充
-    private char eiNidentSize; // ident[]大小
+    public final char[] eiPad = new char[6]; // 填充
+    public char eiNidentSize; // ident[]大小
 
-    private char eiAbiVersion;
+    public char eiAbiVersion;
 
-    private EType eType; // ELF类型
+    public EType eType; // ELF类型
 
-    private EMachine eMachine; // 平台
+    public EMachine eMachine; // 平台
 
-    private EVersion eVersion; //版本
+    public EVersion eVersion; //版本
 
-    private long eEntry; //8   程序入口地址
-    private long ePhoff; //8   程序段表头的偏移
-    private long eShoff; //8   节表头的偏移
+    public long eEntry; //8   程序入口地址
+    public long ePhoff; //8   程序段表头的偏移
+    public long eShoff; //8   节表头的偏移
 
-    private int eFlags; //4    和处理器相关的一个标记
+    public int eFlags; //4    和处理器相关的一个标记
 
-    private int elfHeaderSize;// 2   ELF表头的大小
+    public int elfHeaderSize;// 2   ELF表头的大小
 
-    private int ePhEntrySize; //2   程序表头的Entry大小
-    private int ePhNum; //2       程序表头的Entry数量
-    private int eShEntrySize; //2    节表头Entry大小
-    private int eShNum;//2           节表头Entry数量
-    private int e_ShStrIndex; //2    节表中字符Entry的索引位置
-
-
-    ElfSectionHeaderParse elfSectionHeaderParse;
+    public int ePhEntrySize; //2   程序表头的Entry大小
+    public int ePhNum; //2       程序表头的Entry数量
+    public int eShEntrySize; //2    节表头Entry大小
+    public int eShNum;//2           节表头Entry数量
+    public int e_ShStrIndex; //2    节表中字符Entry的索引位置
 
 
     @Override
-    public int parse(long start, byte[] bytes) {
+    public void parse(long start, byte[] bytes) {
         Utils.log("Elf Header:");
         // ident
         for (int i = 0; i < 4; i++) {
@@ -117,16 +114,6 @@ public class ElfHeaderParse implements Parse {
 
         e_ShStrIndex = Utils.getU2Int(0x3E, bytes);
         Utils.log("section中string table index：" + e_ShStrIndex);
-
-
-        ElfProgramHeaderParse elfProgramHeaderParse = new ElfProgramHeaderParse(ePhoff, ePhEntrySize, ePhNum);
-        elfProgramHeaderParse.parse(ePhoff, bytes);
-
-
-        elfSectionHeaderParse = new ElfSectionHeaderParse(eShoff, eShEntrySize, eShNum, e_ShStrIndex);
-        elfSectionHeaderParse.parse(eShoff, bytes);
-
-        return 0;
     }
 
     private void printEident() {
@@ -151,12 +138,5 @@ public class ElfHeaderParse implements Parse {
         if (eiOSAbi != null) {
             Utils.log(eiOSAbi.name());
         }
-    }
-
-    public long getMethodAddress(String method) {
-        if (elfSectionHeaderParse != null) {
-            return elfSectionHeaderParse.getMethodAddress(method);
-        }
-        return 0;
     }
 }

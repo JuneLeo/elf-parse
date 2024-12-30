@@ -21,7 +21,7 @@ public class ElfProgramHeaderParse implements Parse {
     }
 
     @Override
-    public int parse(long s, byte[] bytes) {
+    public void parse(long s, byte[] bytes) {
         int start = (int) s;
         for (int i = 0; i < num; i++) {
             SegmentElement segmentElement = new SegmentElement();
@@ -52,7 +52,5 @@ public class ElfProgramHeaderParse implements Parse {
             Utils.log(i + "," + segmentElementList.get(i));
         }
 
-
-        return 0;
     }
 }

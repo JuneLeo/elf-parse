@@ -1,5 +1,7 @@
 package com.elf.parse.section;
 
+import com.elf.parse.Utils;
+
 public class DynSymElement {
     public int symNameOff;//4
 
@@ -19,7 +21,7 @@ public class DynSymElement {
     @Override
     public String toString() {
         return "DynSymElement{" +
-                "symNameOff=" + symNameOff +
+                "symNameOff=" + Utils.toHex(symNameOff) +
                 ", name='" + name + '\'' +
                 ", symInfo=" + symInfo +
                 ", symOther=" + symOther +

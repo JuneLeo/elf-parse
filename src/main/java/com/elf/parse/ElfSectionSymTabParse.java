@@ -22,7 +22,7 @@ public class ElfSectionSymTabParse implements Parse {
     }
 
     @Override
-    public int parse(long s, byte[] bytes) {
+    public void parse(long s, byte[] bytes) {
         Utils.log("-------------ElfSymTabParse-------------");
         int start = (int) s;
         int length = (int) (size / entrySize);
@@ -51,7 +51,7 @@ public class ElfSectionSymTabParse implements Parse {
         for (int i = 0; i < symTabElementList.size(); i++) {
             SymTabElement symTabElement = symTabElementList.get(i);
             //
-            Utils.log(i + "," + symTabElement);
+//            Utils.log(i + "," + symTabElement);
         }
 
         /**
@@ -65,8 +65,6 @@ public class ElfSectionSymTabParse implements Parse {
          * 77121,SymTabElement{symNameOff=2171578, name='_ZN4amap3vcs27VCSManagerStateForListeningD0Ev', symInfo=2, symOther=0, symShndx=12, symValue=1677572, symSize=52}
          */
 
-
-        return 0;
     }
 
     public long getMethodAddress(String method) {

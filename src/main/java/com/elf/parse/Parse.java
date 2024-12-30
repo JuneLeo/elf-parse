@@ -1,5 +1,5 @@
 package com.elf.parse;
 
 public interface Parse {
-    int parse(long start, byte[] bytes);
+    void parse(long start, byte[] bytes);
 }

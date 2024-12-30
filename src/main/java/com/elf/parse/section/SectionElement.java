@@ -1,5 +1,7 @@
 package com.elf.parse.section;
 
+import com.elf.parse.Utils;
+
 public class SectionElement {
     public int nameOffset; // 相对于.shstrtab表中虚拟地址的偏移
 
@@ -32,7 +34,7 @@ public class SectionElement {
                 ", sType=" + sType+
                 ", sFlag=" + sFlag+
                 ", sAddr=" + sAddr +
-                ", sOffset=" + sOffset +
+                ", sOffset=" + Utils.toHex(sOffset) +
                 ", sSize=" + sSize +
                 ", sLink=" + sLink +
                 ", sInfo=" + sInfo +

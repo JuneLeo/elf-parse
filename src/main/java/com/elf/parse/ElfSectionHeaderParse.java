@@ -9,12 +9,12 @@ import java.util.List;
 
 public class ElfSectionHeaderParse implements Parse {
 
-    private long offset;
-    private int entrySize;
-    private int num;
-    private int strIndex;
+    public long offset;
+    public int entrySize;
+    public int num;
+    public int strIndex;
 
-    private final List<SectionElement> sectionElementList = new ArrayList<>();
+    public final List<SectionElement> sectionElementList = new ArrayList<>();
 
     public ElfSectionHeaderParse(long eShoff, int eShEntrySize, int eShNum, int eShStrIndex) {
         this.offset = eShoff;
@@ -23,11 +23,8 @@ public class ElfSectionHeaderParse implements Parse {
         this.strIndex = eShStrIndex;
     }
 
-    ElfSectionSymTabParse elfSectionSymTabParse;
-    ElfSectionDynSymParse elfSectionDynSymParse;
-
     @Override
-    public int parse(long s, byte[] bytes) {
+    public void parse(long s, byte[] bytes) {
         int start = (int) s;
         for (int i = 0; i < num; i++) {
             SectionElement sectionElement = new SectionElement();
@@ -68,58 +65,14 @@ public class ElfSectionHeaderParse implements Parse {
             Utils.log(i+ "," + sectionElementList.get(i));
         }
 
-
-
-        for (SectionElement element : sectionElementList) {
-            if (element.name == null) {
-                continue;
-            }
-            switch (element.name) {
-                case ".symtab":
-                    SectionElement strTable = this.getSectionElement(".strtab");
-                    if(strTable != null) {
-                        elfSectionSymTabParse = new ElfSectionSymTabParse(element.sOffset, element.sSize, element.sEntrySize, strTable.sOffset);
-                        elfSectionSymTabParse.parse(element.sOffset, bytes);
-                    }
-                    break;
-                case ".dynsym":
-                    SectionElement dynStr = this.getSectionElement(".dynstr");
-                    if(dynStr != null) {
-                        elfSectionDynSymParse = new ElfSectionDynSymParse(element.sOffset, element.sSize, element.sEntrySize, dynStr.sOffset);
-                        elfSectionDynSymParse.parse(element.sOffset, bytes);
-                    }
-                    break;
-            }
-        }
-
-        return 0;
     }
 
-    private SectionElement getSectionElement(String s) {
+    public SectionElement getSectionElement(String s) {
         for (SectionElement sectionElement : sectionElementList) {
             if (s.equals(sectionElement.name)) {
                 return sectionElement;
             }
         }
         return null;
-    }
-
-
-    public long getMethodAddress(String method) {
-        if (elfSectionSymTabParse != null) {
-            long methodAddress = elfSectionSymTabParse.getMethodAddress(method);
-            if (methodAddress != 0) {
-                return methodAddress;
-            }
-        }
-
-        if (elfSectionDynSymParse != null) {
-            long methodAddress = elfSectionDynSymParse.getMethodAddress(method);
-            if (methodAddress != 0) {
-                return methodAddress;
-            }
-        }
-
-        return 0;
     }
 }

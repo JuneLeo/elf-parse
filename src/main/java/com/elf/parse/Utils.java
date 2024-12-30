@@ -101,9 +101,14 @@ public final class Utils {
 
     public static void log(String tag, String msg) {
         System.out.println(tag + " : " + msg);
+//        Log.d(tag, msg);
     }
 
     public static void log(String msg) {
         log("elf-parse", msg);
+    }
+
+    public static String toHex(long value) {
+        return "0x" + Long.toHexString(value);
     }
 }

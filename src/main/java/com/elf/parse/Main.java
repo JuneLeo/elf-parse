@@ -19,8 +19,8 @@ public class Main {
 
         byte[] bytes = readFile("/Users/juneleo/Desktop/libcall.so");
 
-        ElfHeaderParse elfHeaderParse = new ElfHeaderParse();
-        elfHeaderParse.parse(0, bytes);
+        MainParse mainParse = new MainParse();
+        mainParse.parse(0, bytes);
 
     }
     //122592
